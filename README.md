@@ -1,5 +1,8 @@
 # Lyricflow
 
+## Contributors
+
+* Chintip Winn
 ## About Lyricflow
 
 ### What will the product do
