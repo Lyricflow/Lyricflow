@@ -4,6 +4,7 @@
 
 * Chintip Winn
 * Henry Jetmundsen
+* Michael Jimenez
 ## About Lyricflow
 
 ### What will the product do
