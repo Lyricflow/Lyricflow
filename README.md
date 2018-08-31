@@ -3,6 +3,7 @@
 ## Contributors
 
 * Chintip Winn
+* Henry Jetmundsen
 ## About Lyricflow
 
 ### What will the product do
