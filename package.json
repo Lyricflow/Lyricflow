@@ -1,0 +1,19 @@
+{
+  "name": "lyricflow",
+  "version": "1.0.0",
+  "description": "A Google Assistant app to allow users to search for songs using lyrics",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lyricflow/Lyricflow.git"
+  },
+  "author": "Henry Jetmundsen, Michael Jimenez, Chintip Winn, Jonathan Gilbert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lyricflow/Lyricflow/issues"
+  },
+  "homepage": "https://github.com/Lyricflow/Lyricflow#readme"
+}
