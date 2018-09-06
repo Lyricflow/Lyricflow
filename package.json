@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Lyricflow/Lyricflow/issues"
   },
-  "homepage": "https://github.com/Lyricflow/Lyricflow#readme"
+  "homepage": "https://github.com/Lyricflow/Lyricflow#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
