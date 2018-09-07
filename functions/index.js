@@ -11,8 +11,8 @@ app.intent('find song', (conv, lyrics) => {
 	options.genius.qs = {q: lyrics};
 
   request(options.genius, (err, res, body) => {
-  	let song = body.hits[0].result.title;
-  	let artist = body.hits[0].result.primary_artist.name
+  	let song = body.response.hits[0].result.title;
+  	let artist = body.response.hits[0].result.primary_artist.name
 
   	conv.close("The song is ${song} by ${artist}");
   });
