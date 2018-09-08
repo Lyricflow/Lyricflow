@@ -2,12 +2,13 @@ const keys = require("./keys");
 
 module.exports = {
 	genius: {
-		url: "api.genius.com/search",
+		uri: "https://api.genius.com/search",
 		headers: {
 			Authorization: keys.genius
 		},
 		qs: {
 			q: ""
-		}
+		},
+		json: true
 	}
 }
