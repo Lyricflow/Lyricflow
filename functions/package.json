@@ -12,7 +12,13 @@
     "actions-on-google": "^2.3.0",
     "firebase-admin": "~6.0.0",
     "firebase-functions": "^2.0.3",
+<<<<<<< HEAD
     "request": "^2.88.0"
+=======
+    "node-fetch": "^2.2.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+>>>>>>> a6e63446df26d3c314c5578e3f15cae897d28112
   },
   "private": true
 }
