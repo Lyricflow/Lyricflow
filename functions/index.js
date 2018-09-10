@@ -3,24 +3,39 @@
 let options = require('./config/requestOptions');
 
 const rp = require('request-promise');
+const request = require('request');
 const {dialogflow} = require('actions-on-google')
 const functions = require('firebase-functions');
 const app = dialogflow({debug: true});
 
+exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app);
+
 app.intent('Default Welcome Intent', (conv) => {
-    conv.ask('Tell me some lyrics');
+    conv.ask('Give me the lyrics.');
 });
 
 app.intent('Default Fallback Intent', (conv) => {
-    options.genius.qs = {q: conv.input.raw}
+    conv.close('I\'m not having it');
+})
 
-    return rp(options.genius).then((body) => {
+app.intent('ask for song', (conv, {lyrics}) => {
+    options.genius.qs = {q: lyrics}
+
+    const getSong = () => new Promise((resolve, reject) => {
+        request(options.genius, (err, res, body) => {
+            if(err){
+                reject(err);
+            } else {
+                resolve(body);
+            }
+        })
+    })
+
+    return getSong().then((body) => {
         let song = body.response.hits[0].result.title;
         let artist = body.response.hits[0].result.primary_artist.name;
 
         conv.close("The song is " + song + " by " + artist);
-        return Promise.resolve();
+        return song;
     });
 });
-
-exports.dialogflowFirebaseFulfillment = functions.https.onRequest(app);
