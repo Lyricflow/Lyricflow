@@ -21,21 +21,16 @@ app.intent('Default Fallback Intent', (conv) => {
 app.intent('ask for song', (conv, {lyrics}) => {
     options.genius.qs = {q: lyrics}
 
-    const getSong = () => new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         request(options.genius, (err, res, body) => {
             if(err){
                 reject(err);
             } else {
-                resolve(body);
+                let song = body.response.hits[0].result.title;
+                let artist = body.response.hits[0].result.primary_artist.name;
+                let result = conv.close("The song is " + song + " by " + artist);
+                resolve(result);
             }
         })
     })
-
-    return getSong().then((body) => {
-        let song = body.response.hits[0].result.title;
-        let artist = body.response.hits[0].result.primary_artist.name;
-
-        conv.close("The song is " + song + " by " + artist);
-        return song;
-    });
 });
