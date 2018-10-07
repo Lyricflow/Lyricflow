@@ -22,7 +22,7 @@ Currently we are working on two approaches to solve the problem:
 We gather huge datasets, and work with the data to train our machine learning model using the Tensorflow python ML library. After training for 10 Epochs with a vocabulary size of 15000 (9,000,000+ pieces of data to analyze), the model can accurately (>90%) predicts an artist to a song just from lyrics. Improvements are pending, and the model will gradually become smarter and efficient.
 
 * **II: Sentiment Analysis**
-
+Using Google's Natural Language API, we can retrieve sentiment data of input text. The sentiment data includes a score in range (-1,1) that indicates the overall emotion of the text, and a magnitude that indicates how much emotional content is present within the document. By filling our lyric dataset with these values for each song, we hope to find a correlation between the sentiment analysis of text to the entire song. This information will be usefull in shrinking the set of songs we need to search from. For example, if lyrics have a sentiment score of 0.4, we expect the song to lie in some range (0.4+x, 0.4-x), where x is the ideal threshold. Through analysis and training we can determine the best threshold where the song we are looking for falls into our subset.
 
 ### Why are you creating this particular product?
 
