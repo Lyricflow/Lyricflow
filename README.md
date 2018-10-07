@@ -10,7 +10,19 @@
 
 ### What will the product do
 
-Lyricflow is a third party app integrated with Google Assistant. Lyricflow allows users to talk to Google Assistant and have it parse their input using natural language queries powered by Google’s Dialogflow and return the song title and artist. 
+Lyricflow is a third party app integrated with Google Assistant. Lyricflow allows users to talk to Google Assistant and have it parse their input using natural language queries powered by Google’s Dialogflow and return the song title and artist.
+
+### Our approaches
+
+We started with regular regex searching, which worked on small datasets (<5000 songs), but then became unfeasible with more realistic (read: larger) datasets.
+
+Currently we are working on two approaches to optimize our process:
+
+* **I: Machine Learning // Neural Network**
+We gather huge datasets, and work with the data to train our machine learning model using the Tensorflow python ML library. After training for 10 Epochs with a vocabulary size of 15000 (9,000,000+ pieces of data to analyze), the model can accurately (>90%) predicts an artist to a song just from lyrics. Improvements are pending, and the model will gradually become smarter and efficient.
+
+* **II: Sentiment Analysis**
+
 
 ### Why are you creating this particular product?
 
