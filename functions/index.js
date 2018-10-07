@@ -1,6 +1,7 @@
 'use strict';
 
 let options = require('./config/requestOptions');
+let spawn = require('child_process').spawn;
 
 const rp = require('request-promise');
 const request = require('request');
@@ -19,21 +20,19 @@ app.intent('Default Fallback Intent', (conv) => {
 })
 
 app.intent('ask for song', (conv, {lyrics}) => {
-  options.genius.qs = {q: lyrics}
-
   const getSong = () => new Promise((resolve, reject) => {
-    request(options.genius, (err, res, body) => {
-      if(err)
-        reject(err);
-      else
-        resolve(body);
-    })
-  })
+    let py = spawn('python', ['main.py']);
+    
+    py.stdout.on('data', (data) => {
+      resolve(data.toString());
+    });
+
+    py.stdin.write(lyrics);
+    py.stdin.end();
+  });
 
   return getSong().then((body) => {
-    let song = body.response.hits[0].result.title;
-    let artist = body.response.hits[0].result.primary_artist.name;
-    let result = conv.close("The song is " + song + " by " + artist);
+    let result = conv.close(body);
     return result;
   })
 });
