@@ -1,6 +1,3 @@
-# Chintip Winn
-# Neural Network to classify lyrics -> artists
-
 import pandas as pd
 import numpy as np
 import pickle
@@ -15,35 +12,30 @@ from sklearn.metrics import confusion_matrix
 from pathlib import Path
 
 # for reproducibility
-# np.random.seed(42069)
-
+np.random.seed(42069)
 
 # Data preparation
 
-training_csv_df = pd.read_csv('data/billboard.csv')
-data = training_csv_df.drop(['Rank', 'Year', 'Source'], axis=1)
+training_csv_df = pd.read_csv('data/new_spliced_billboard.csv')
 
-data = data.replace(np.nan, 'asdfg', regex=True)
-
-# data = data.apply(np.random.permutation, axis=1)    
+data = training_csv_df 
 
 # some important numbers
-num_labels = 2473
+num_labels = 1991
 vocab_size = 15000
 batch_size = 100
-num_epochs = 10
+num_epochs = 30
 
 train_size = int(len(data))
 
-train_lyrics = data['Lyrics'][:train_size]
-train_artists = data['Artist'][:train_size]
-train_song_names = data['Song'][:train_size]
 
-test_lyrics = data['Lyrics'][:train_size]
-test_artists = data['Artist'][:train_size]
-test_song_names = data['Song'][:train_size]
+train_lyrics = data['lyrics'][:train_size]
+train_artists = data['artist'][:train_size]
+train_song_names = data['title'][:train_size]
 
-# print(train_lyrics)
+test_lyrics = data['lyrics'][:train_size]
+test_artists = data['artist'][:train_size]
+test_song_names = data['title'][:train_size]
 
 # tokenizes the lyrics
 
@@ -164,26 +156,9 @@ def plot_confusion_matrix(cm, classes,
     plt.xlabel('Predicted label')
     plt.tight_layout()
 
-# my_model = train()
-
-my_model = load_model('my_model.h5')
+my_model = train()
 
 test(my_model, randomize=True)
-
-x_test_sliced = x_test[0:10]
-y_test_sliced = y_test[0:10]
-
-y_pred = my_model.predict(x_test_sliced)
-
-text_labels = encoder.classes_
-
-for i in range(10):
-    to_predict = x_test_sliced[i]
-    prediction = my_model.predict(np.array([x_test_sliced[i]]))
-    predicted_label = text_labels[np.argmax(prediction[0])]
-
-    print('Actual label:' + test_artists.iloc[i])
-    print('Predicted label: ' + predicted_label)
 
 print(y_pred)
 
