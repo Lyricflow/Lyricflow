@@ -3,10 +3,11 @@ const fs = require('fs-extra');
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     const lyrics = req.query.q;
     const spawn = require("child_process").spawn;
-    const pythonProcess = spawn('python3',["./regex_search.py", lyrics]);
+    // const pythonProcess = spawn('python3',["./regex_search.py", lyrics]);
+    const pythonProcess = spawn('python3',["./predictor.py", lyrics]);
     result = "";
 
     pythonProcess.stdout.on('data', (data) => {
