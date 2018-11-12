@@ -1,8 +1,17 @@
 import pandas as pd
 import numpy as np
 import pickle
-from sklearn.preprocessing import LabelBinarizer
+import sys
+import os
+
+# Hide useless keras information 
+stderr = sys.stderr
+sys.stderr = open(os.devnull, 'w')
 from keras.models import load_model
+sys.stderr = stderr
+os.esnviron['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
+from sklearn.preprocessing import LabelBinarizer
 
 model = load_model('model.h5')
 
@@ -15,7 +24,8 @@ test_artists = data['artist'][:test_size]
 with open('tokenizer.pickle', 'rb') as handle:
     tokenizer = pickle.load(handle)
 
-song1 = input('Enter partial lyrics: ')
+
+song1 = sys.argv[1]
 
 x_data = []
 x_data.append(song1)
@@ -33,6 +43,6 @@ for x_t in x_tokenized:
 	prediction = model.predict(np.array([x_t]))
 
 	predicted_label = text_labels[np.argmax(prediction[0])]
-	print("Predicted label: " + predicted_label)
+	print(predicted_label)
 
 

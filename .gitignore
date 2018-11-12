@@ -77,3 +77,7 @@ typings/
 
 # NN model
 neural-network/model.h5
+expressServer/model.h5
+
+# PyCache
+expressServer/__pycache__/*

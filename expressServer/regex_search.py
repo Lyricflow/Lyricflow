@@ -1,4 +1,3 @@
-# Sample python integration with HTTP program
 import numpy as np
 import pandas as pd
 import re as regex
@@ -6,13 +5,13 @@ import string
 import json
 import sys
 
-# sanitize the input string
+
 def sanitize(snippet):
   remove_punctuation = str.maketrans('', '', string.punctuation)
   snippet = snippet.lower().translate(remove_punctuation).split()
   return snippet
 
-# regex search courtesy of Henry
+
 def find_song(snippet):
   pattern = "([a-z]+ ){0,2}"
   maxScore = 0
