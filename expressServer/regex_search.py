@@ -40,8 +40,7 @@ def find_song(snippet):
 
   print("{} by {}".format(song_name, artist))
 
-dialogflow_json = json.loads(sys.argv[1])
-lyrics = dialogflow_json['queryResult']['queryText']
+lyrics = sys.argv[1]
 snippet = sanitize(lyrics)
 find_song(snippet)
 

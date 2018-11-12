@@ -15,22 +15,24 @@ app.intent('Default Welcome Intent', (conv) => {
 });
 
 app.intent('Default Fallback Intent', (conv) => {
-  conv.close('I\'m not having it');
-})
+  conv.close('Idek what you\'re asking me to do dude');
+});
 
 app.intent('ask for song', (conv, {lyrics}) => {
+  options.localAPI.qs.q = lyrics;
+
   const getSong = () => new Promise((resolve, reject) => {
     request(options.localAPI, (err, res, body) => {
       if(err){
         reject(err);
       } else {
         resolve(body);
-     }
+      }
     });
   });
 
   return getSong().then((body) => {
     let result = conv.close(body);
     return result;
-  })
+  });
 });

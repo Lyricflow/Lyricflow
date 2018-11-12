@@ -3,13 +3,10 @@ const fs = require('fs-extra');
 const app = express();
 const port = 3000;
 
-// app.get('/', (req, res) => res.send('Hello World!'));
-
-let df_json = fs.readFileSync('df-request.json');
-
 app.get('/', (req, res) => {
+    const lyrics = req.query.q;
     const spawn = require("child_process").spawn;
-    const pythonProcess = spawn('python3',["./regex_search.py", df_json]);
+    const pythonProcess = spawn('python3',["./regex_search.py", lyrics]);
     result = "";
 
     pythonProcess.stdout.on('data', (data) => {
@@ -17,7 +14,6 @@ app.get('/', (req, res) => {
     });
 
     pythonProcess.stdout.on('end', () => {
-        console.log(result);
         res.send(result);
     })
 })
